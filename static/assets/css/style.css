@@ -1,0 +1,82 @@
+body{
+  background-color: #DCDCDC;
+}
+
+.container{
+  box-shadow: 0px 0px 2px 2px;
+  background-color: #FFF;
+}
+.banner{
+  background-color: #1a4380;
+}
+.dropdownPanel{
+  background-color: #1a4380;
+  color: #FFF;
+  width: 100%;
+  font-weight: bold;
+}
+.nav-link, .nav-item{
+  color:#FFF;
+}
+
+.nav-item:hover, .nav-link:hover{
+  color: #FFF;
+  background-color: #1a3480;
+}
+.dropdown-item:hover{
+  background-color: #1a4380;
+  color: #FFF;
+}
+.centreContent{
+  padding: 5px;
+}
+.leftpanel{
+    padding:2px;
+    margin:0px;
+}
+.linksMenu{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.linksMenu> li>span, .linksMenu >li>ul>li{
+  font-size: .85em;
+}
+.menuHead{
+  font-size: 0.87em;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #1a4380;
+  padding: 5px;
+  color: #fff;
+}
+.subcat{
+    padding-left:5px;
+}
+
+.linkItem{
+  font-size: .9em;
+  display: block;
+}
+.footer{
+  background-color: #1a4380;
+  color: #FFF;
+  width: 100%;
+  padding: 5px;
+  font-size: .87em;
+  font-weight: bold;
+}
+hr{
+    padding: 0px;
+    margin: 0px;
+}
+.blink{
+	animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+	0%{		color: #F00;	}
+	49%{	color: transparent;	}
+	50%{	color: transparent;	}
+	99%{	color:transparent;	}
+	100%{	color: #F00;	}
+}
