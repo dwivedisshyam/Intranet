@@ -11,7 +11,6 @@ def index(request):
     response['submenu'] = SubMenu.objects.all()
     response['category'] = Category.objects.all()
     response['subcategory'] = SubCategory.objects.all()
-
     return render(request, 'index.html', response)
 
 
