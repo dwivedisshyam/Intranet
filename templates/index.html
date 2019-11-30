@@ -37,17 +37,17 @@
                     <ul class="navbar-nav">{%for m in menu%}{%if m.isDropdown%}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{m.text}}</a>
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{m.text|title}}</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 {%for sm in submenu%}
                                 {%if sm.menuId.text == m.text%}
-                                <a class="dropdown-item" href="{{sm.url}}">{{sm.text}}</a>
+                                <a class="dropdown-item" href="{{sm.url}}">{{sm.text|title}}</a>
                                 {%endif%}
                                 {%endfor%}
                             </div>
                         </li>
                         {%else%}
-                        <li class="nav-item"><a class="nav-link" href="{{m.url}}">{{m.text}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{m.url}}">{{m.text|title}}</a></li>
                         {%endif%}
                         {%endfor%}
                     </ul>
