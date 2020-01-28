@@ -25,6 +25,7 @@ urlpatterns = [
                   path('index/', intranetuser.index),
                   path('carousel/', intranetuser.carousel),
                   path('content/', intranetuser.getContent),
+                  path('menucontent/', intranetuser.menucontent),
                   path('admin/', admin.site.urls),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

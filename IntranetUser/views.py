@@ -25,3 +25,10 @@ def getContent(request):
     print(f'ID: {subcatid}')
     response['contnt'] = SubCategory.objects.get(id=subcatid)
     return render(request, 'content.html', response)
+
+def menucontent(request):
+    response = {}
+    submenuid = request.GET.get('submenuid')
+    print(f'ID: {submenuid}')
+    response['contnt'] = SubMenu.objects.get(id=submenuid)
+    return render(request, 'content.html', response)

@@ -15,7 +15,8 @@ class Menu(models.Model):
 class SubMenu(models.Model):
     menuId = models.ForeignKey(Menu, on_delete=models.CASCADE)
     text = models.CharField(max_length=20, blank=False)
-    url = models.CharField(max_length=40, blank=False)
+    url = models.CharField(max_length=40, blank=True)
+    content = RichTextUploadingField(blank=True)
 
     def __str__(self):
         return self.text
