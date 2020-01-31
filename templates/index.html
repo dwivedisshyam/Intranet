@@ -76,15 +76,15 @@
                     <div class="menuHead" id="{{cat.text}}">{{cat.text|upper}}</div>
                     <div id="subcat{{cat.text}}" class="subcat">
                         {%for subcat in subcategory%}
-                        {%if subcat.categoryId.text == cat.text%}
-                        {%if subcat.url%}
-                        <span class="linkItem"><a href="https://{{subcat.url}}" target="_blank">{{subcat.text|title}}</a></span>
-                        <hr>
-                        {%else}
-                        <span class="linkItem"><a href="../content/?subcatid={{subcat.id}}" target="content-frame">{{subcat.text|title}}</a></span>
-                        <hr>
-                        {%endif%}
-                        {%endif%}
+                          {%if subcat.categoryId.text == cat.text%}
+                            {%if subcat.url%}
+                            <span class="linkItem"><a href="https://{{subcat.url}}" target="_blank">{{subcat.text|title}}</a></span>
+                            <hr>
+                            {%else%}
+                            <span class="linkItem"><a href="../content/?subcatid={{subcat.id}}" target="content-frame">{{subcat.text|title}}</a></span>
+                            <hr>
+                            {%endif%}
+                          {%endif%}
                         {%endfor%}
 
                     </div>

@@ -1,4 +1,4 @@
 *.pyc
 venv/*
 media/*
-Intranet/settings.py
+Intranet/confidential.py
