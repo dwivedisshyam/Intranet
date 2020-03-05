@@ -77,13 +77,13 @@ WSGI_APPLICATION = 'Intranet.wsgi.application'
 DATABASES = confidential.DATABASE
 
 # CKEDITOR CUSTOMIZATION
-'''
+
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'basic',
+        'toolbar': 'advance',
     },
 }
-'''
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
