@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="icon" href="{% static 'images/logo.png' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>Intranet NITW</title>
+</head>
+
+<body>
+  <div class="container">
+    <!--TOP BANNER-->
+    <div class="row">
+      <div class="col banner">
+        <img class="img-fluid" src="{% static 'images/nitwlogo.png' %}" alt="">
+      </div>
+    </div>
+    <!--TOP BANNER END-->
+
+
+    <div class="row centreContent">
+      <div class="col-sm-5 m-auto p-3">
+        <center>
+          <h3 class="d-inline">Login</h3>
+        </center>
+        <form class="m-3" action="/login/" method="POST">{% csrf_token %}
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" name="username" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <label for="pswd">Password</label>
+            <input type="password" class="form-control" name="pswd" id="pswd" placeholder="Password" required>
+          </div>
+
+          <button type="submit" class="btn btn-success">Login</button>
+          <small class='text-danger'>{{invalidlogin}}</small>
+        </form>
+        <p style="height: 120px;"></p>
+      </div>
+
+    </div>
+
+    <!--FOOTER-->
+    <div class="row">
+      <div class="col footer">
+        <center>
+          National Institute of Technology, Warangal - 506004, TS, INDIA | NITW Phone: +91-870-2459191 | FAX :
+          +91-870-2459547 &nbsp; Copyright &copy; 2018. WSDC
+        </center>
+
+      </div>
+    </div>
+    <!--FOOTER END-->
+  </div>
+
+  <!-- Optional JavaScript -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</body>
+
+</html>
