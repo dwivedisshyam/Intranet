@@ -35,7 +35,7 @@ def getContent(request):
 def menucontent(request):
     response = {}
     response['menu'] = Menu.objects.all()
-    response['submenu'] = SubMenu.objects.all()
+    response['submenu'] = SubMenu.objects.all().order_by("text")
     submenuid = request.GET.get('submenuid')
     response['category'] = Category.objects.filter(subMenuId=submenuid)
     response['subcategory'] = SubCategory.objects.all()
@@ -117,3 +117,12 @@ def deleteCategory(request):
 def logout(request):
     lgout(request)
     return redirect('/login')
+
+
+def error_404(request, exception):
+    response = {}
+    return render(request, "error_404.html", response)
+
+
+def error_500(request):
+    pass

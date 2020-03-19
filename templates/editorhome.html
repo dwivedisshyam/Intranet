@@ -1,203 +1,147 @@
-<!DOCTYPE html>
+{% extends './base_layout.html' %}
 {% load staticfiles %}
-<html lang="en">
-
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="icon" href="{% static 'images/logo.png' %}">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
-  <title>Intranet NITW</title>
-</head>
-
-<body>
-  <div class="container">
-    <!--TOP BANNER-->
-    <div class="row">
-      <div class="col banner">
-        <img class="img-fluid" src="{% static 'images/nitwlogo.png' %}" alt="">
+{% block content %}
+<div class="row centreContent">
+  <div class="col-sm-11">
+    <div class="card bg-light text-dark">
+      <div class="card-body p-2">
+        <h5>Username: {{username}} <br>
+          Department: {{dept}}</h5>
       </div>
     </div>
-    <!--TOP BANNER END-->
+  </div>
+  <div class="col-sm-1"><a href="/logout/" class="btn btn-danger">Logout</a></div>
+</div>
 
-    <div class="row centreContent">
-      <div class="col-sm-11">
-        <div class="card bg-light text-dark">
-          <div class="card-body p-2">
-            <h5>Username: {{username}} <br>
-              Department: {{dept}}</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-1"><a href="/logout/" class="btn btn-danger">Logout</a></div>
-    </div>
-
-    <div class="row centreContent">
-      <div class="col-sm-2">
-        <ul class="linksMenu">
-          {% for category, subcategories in catsNsubcats.items %}
-          <li>
-            <div class="menuHead" id="{{category.id}}">{{category.text|upper}}</div>
-            <div id="subcat{{category.id}}" class="subcat">
-              {% for subcat in subcategories %}
-              <span class="linkItem"><a href="../content/?subcatid={{subcat.id}}" target="content-frame">{{subcat.text|title}}</a></span>
-              {% endfor %}
-            </div>
-          </li>
+<div class="row centreContent">
+  <div class="col-sm-2">
+    <ul class="linksMenu">
+      {% for category, subcategories in catsNsubcats.items %}
+      <li>
+        <div class="menuHead" id="{{category.id}}">{{category.text|upper}}</div>
+        <div id="subcat{{category.id}}" class="subcat">
+          {% for subcat in subcategories %}
+          <span class="linkItem"><a href="../content/?subcatid={{subcat.id}}" target="content-frame">{{subcat.text|title}}</a></span>
           {% endfor %}
-        </ul>
-      </div>
-      <div class="col-sm-10 jumbotron">
-        <div class="row m-2">
-          <div class="col-sm-5">
-            <button type="button" name="button" class="btn btn-primary btn-lg col" data-toggle="modal" data-target="#addCategoryModal">Add Category</button>
-          </div>
-          <div class="col-sm-5">
-            <button type="button" name="button" class="btn btn-info btn-lg col" data-toggle="modal" data-target="#addSubCategoryModal">Add Sub Category</button>
-          </div>
         </div>
-        <div class="row m-2">
-          <div class="col-sm-5">
-            <button type="button" name="button" class="btn btn-danger btn-lg col" data-toggle="modal" data-target="#deleteCategoryModal">Delete Category</button>
-          </div>
-          <div class="col-sm-5">
-            <button type="button" name="button" class="btn btn-info btn-lg col" data-toggle="modal" data-target="#">Delete Sub Category</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Add Category Modal -->
-    <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="Add Category" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Add New Category</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="/addCategory/" method="post">{%csrf_token%}
-              <div class="form-group">
-                <input type="text" name="catName" class="form-control" placeholder="New Category Name" required>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-success" value="Add Category">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add Sub Category Modal -->
-    <div class="modal fade" id="addSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="Add Sub Category" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Add New Sub Category</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="/addSubCategory/" method="post" enctype="multipart/form-data">{%csrf_token%}
-              <div class="form-group">
-                <select class="form-control" name="category">
-                  {% for category, subcategories in catsNsubcats.items %}
-                  <option value="{{category.id}}">{{category}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="text" name="subCatName" class="form-control" placeholder="New Sub Category Name">
-              </div>
-              <div class="form-group">
-                <input type="text" name="url" class="form-control" placeholder="URL">
-              </div>
-              <div class="form-group">
-                <textarea class="ckeditor" name="content"></textarea>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-success" value="Add Sub Category">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- DELETE CATEGORY MODAL -->
-    <div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="Delete Category" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Delete Category</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="/deleteCategory/" method="post" enctype="multipart/form-data">{%csrf_token%}
-              <div class="form-group">
-                <select class="form-control" name="category">
-                  {% for category, subcategories in catsNsubcats.items %}
-                  <option value="{{category.id}}">{{category}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-success" value="Delete">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!--FOOTER-->
-    <div class="row">
-      <div class="col footer">
-        <center>
-          National Institute of Technology, Warangal - 506004, TS, INDIA | NITW Phone: +91-870-2459191 | FAX :
-          +91-870-2459547 &nbsp; Copyright &copy; 2018. WSDC
-        </center>
-
-      </div>
-    </div>
-    <!--FOOTER END-->
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 
-  <!-- Optional JavaScript -->
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-  <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+  <div class="col-sm-10 jumbotron">
+    <div class="row m-2">
+      <div class="col-sm-5">
+        <button type="button" name="button" class="btn btn-primary btn-lg col" data-toggle="modal" data-target="#addCategoryModal">Add Category</button>
+      </div>
+      <div class="col-sm-5">
+        <button type="button" name="button" class="btn btn-info btn-lg col" data-toggle="modal" data-target="#addSubCategoryModal">Add Sub Category</button>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-sm-5">
+        <button type="button" name="button" class="btn btn-danger btn-lg col" data-toggle="modal" data-target="#deleteCategoryModal">Delete Category</button>
+      </div>
+      <!-- <div class="col-sm-5">
+        <button type="button" name="button" class="btn btn-info btn-lg col" data-toggle="modal" data-target="#">Delete Sub Category</button>
+      </div>
+    </div> -->
+    </div>
+  </div>
+</div>
+<!--Add Category Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="Add Category" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add New Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/addCategory/" method="post">{%csrf_token%}
+          <div class="form-group">
+            <input type="text" name="catName" class="form-control" placeholder="New Category Name" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-success" value="Add Category">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <script>
-    $(document).ready(function() {
-      $(".subcat").hide();
+<!-- Add Sub Category Modal -->
+<div class="modal fade" id="addSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="Add Sub Category" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add New Sub Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/addSubCategory/" method="post" enctype="multipart/form-data">{%csrf_token%}
+          <div class="form-group">
+            <select class="form-control" name="category">
+              {% for category, subcategories in catsNsubcats.items %}
+              <option value="{{category.id}}">{{category}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" name="subCatName" class="form-control" placeholder="New Sub Category Name">
+          </div>
+          <div class="form-group">
+            <input type="text" name="url" class="form-control" placeholder="URL">
+          </div>
+          <div class="form-group">
+            <textarea class="ckeditor" name="content"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-success" value="Add Sub Category">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-      $(".menuHead").click(function() {
-        $("#subcat" + this.id).toggle(300);
-      });
+<!-- DELETE CATEGORY MODAL -->
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="Delete Category" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/deleteCategory/" method="post" enctype="multipart/form-data">{%csrf_token%}
+          <div class="form-group">
+            <select class="form-control" name="category">
+              {% for category, subcategories in catsNsubcats.items %}
+              <option value="{{category.id}}">{{category}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-success" value="Delete">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-    });
-  </script>
-</body>
-
-</html>
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock%}
